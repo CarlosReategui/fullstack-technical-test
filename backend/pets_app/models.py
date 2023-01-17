@@ -151,11 +151,11 @@ class Adopcion(models.Model):
     class Meta:
         verbose_name_plural = "Adopciones"
 
-    adoptante = models.OneToOneField(
+    adoptante = models.ForeignKey(
         Adoptante, on_delete=models.CASCADE, related_name="Adoptante", null=False)
-    animal = models.OneToOneField(
+    animal = models.ForeignKey(
         Animal, on_delete=models.CASCADE, related_name="Animal", null=False)
-    voluntario = models.OneToOneField(
+    voluntario = models.ForeignKey(
         Voluntario, on_delete=models.CASCADE, related_name="Voluntario", null=False)
     finalizado = models.BooleanField(default=False)
     fecha = models.DateField(null=False)
