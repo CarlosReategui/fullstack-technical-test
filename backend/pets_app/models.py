@@ -63,11 +63,11 @@ class User(AbstractUser):
 
     base_role = Role.ADMIN
 
-    role = models.CharField(max_length=15, choices=Role.choices)
-    email = models.CharField(max_length=255, unique=True)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
+    role = models.CharField(max_length=15, choices=Role.choices, null=False)
+    email = models.CharField(max_length=255, unique=True, null=False)
+    first_name = models.CharField(max_length=255, null=False)
+    last_name = models.CharField(max_length=255, null=False)
+    is_active = models.BooleanField(default=True, null=False)
     username = models.CharField(max_length=255, null=True, blank=True)
 
     REQUIRED_FIELDS = ['first_name', 'last_name', 'role']
@@ -120,22 +120,23 @@ class Animal(models.Model):
     class Meta:
         verbose_name_plural = "Animales"
 
-    nombre = models.CharField(max_length=255)
-    edad = models.IntegerField()
-    raza = models.CharField(max_length=63)
+    nombre = models.CharField(max_length=255, null=False)
+    edad = models.IntegerField(null=False)
+    raza = models.CharField(max_length=63, null=False)
 
     class Tipo(models.TextChoices):
         PERRO = 'PERRO', 'Perro'
         GATO = 'GATO', 'Gato'
 
-    tipo = models.CharField(max_length=15, choices=Tipo.choices)
+    tipo = models.CharField(max_length=15, choices=Tipo.choices, null=False)
 
     class Estado(models.TextChoices):
         ADOPTADO = 'ADOPTADO', 'Adoptado'
         EN_ADOPCION = 'EN_ADOPCION', 'En adopción'
         EN_ESPERA_DE_ADOPCION = 'EN_ESPERA_DE_ADOPCION', 'En espera de adopción'
 
-    estado = models.CharField(max_length=31, choices=Estado.choices)
+    estado = models.CharField(
+        max_length=31, choices=Estado.choices, null=False)
 
     def __str__(self):
         return self.nombre
@@ -151,13 +152,13 @@ class Adopcion(models.Model):
         verbose_name_plural = "Adopciones"
 
     adoptante = models.OneToOneField(
-        Adoptante, on_delete=models.CASCADE, related_name="Adoptante")
+        Adoptante, on_delete=models.CASCADE, related_name="Adoptante", null=False)
     animal = models.OneToOneField(
-        Animal, on_delete=models.CASCADE, related_name="Animal")
+        Animal, on_delete=models.CASCADE, related_name="Animal", null=False)
     voluntario = models.OneToOneField(
-        Voluntario, on_delete=models.CASCADE, related_name="Voluntario")
+        Voluntario, on_delete=models.CASCADE, related_name="Voluntario", null=False)
     finalizado = models.BooleanField(default=False)
-    fecha = models.DateField()
+    fecha = models.DateField(null=False)
 
     def __str__(self):
         return f'{self.adoptante.email} - {self.voluntario.email} - {self.animal.nombre}'
