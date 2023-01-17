@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Text, Button, Stack } from "@mantine/core";
+import { ThemeProvider } from "./ThemeProvider";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <Stack align="center" mt={50}>
+        <Text size="xl" weight={500}>
+          Welcome to Mantine!
+        </Text>
+        <Button>Click the button</Button>
+      </Stack>
+    </ThemeProvider>
   );
 }
-
-export default App;
