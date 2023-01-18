@@ -81,7 +81,7 @@ class User(AbstractUser):
             return super().save(*args, **kwargs)
 
 
-class AdoptanteManager(BaseUserManager):
+class AdoptanteManager(UserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
         return results.filter(role=User.Role.ADOPTANTE)
@@ -93,10 +93,10 @@ class Adoptante(User):
 
     base_role = User.Role.ADOPTANTE
 
-    adoptante = AdoptanteManager()
+    objects = AdoptanteManager()
 
 
-class VoluntarioManager(BaseUserManager):
+class VoluntarioManager(UserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
         return results.filter(role=User.Role.VOLUNTARIO)
@@ -108,7 +108,7 @@ class Voluntario(User):
 
     base_role = User.Role.VOLUNTARIO
 
-    adoptante = VoluntarioManager()
+    objects = VoluntarioManager()
 
 
 """

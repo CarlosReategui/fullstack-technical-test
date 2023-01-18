@@ -52,10 +52,10 @@ const RegisterPage = (props: Props) => {
     };
     try {
       if (values.role === "ADOPTANTE") {
-        const response = await api.registerVoluntario(body);
+        const response = await api.registerAdoptante(body);
         console.log(response.data);
       } else if (values.role === "VOLUNTARIO") {
-        const response = await api.registerAdoptante(body);
+        const response = await api.registerVoluntario(body);
         console.log(response.data);
       }
       showNotification({
@@ -124,7 +124,7 @@ const RegisterPage = (props: Props) => {
           </Radio.Group>
           <Group position="center" mt="md">
             <Button type="submit" loading={isLoading} variant="light">
-              Log In
+              Sign Up
             </Button>
           </Group>
         </form>

@@ -1,5 +1,5 @@
 from .models import Adoptante, Voluntario, Animal, Adopcion
-from .serializers import AdoptanteSerializer, MyTokenObtainPairSerializer, VoluntarioSerializer, AnimalSerializer, AdopcionSerializer
+from .serializers import AdoptanteSerializer, MyTokenObtainPairSerializer, VoluntarioSerializer, AnimalSerializer, AdopcionSerializer, UserSerializer
 
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response

@@ -9,13 +9,13 @@ import {
   Container,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import api from "../services/api";
-import { showNotification } from "@mantine/notifications";
+import AuthContext from "../context/AuthContext";
+import { useContext } from "react";
 
 type Props = {};
 
 const LoginPage = (props: Props) => {
-  const [isLoading, setLoading] = React.useState(false);
+  const { login, loading } = useContext(AuthContext);
   const form = useForm({
     initialValues: {
       email: "",
@@ -27,27 +27,12 @@ const LoginPage = (props: Props) => {
     },
   });
 
-  const onSubmit = async (values: { email: string; password: string }) => {
-    setLoading(true);
-    try {
-      const response = await api.login(values.email, values.password);
-      console.log(response.data);
-    } catch {
-      showNotification({
-        title: "Error",
-        message: "Email o contraseña incorrectos.",
-        color: "red",
-      });
-    }
-    setLoading(false);
-  };
-
   return (
     <div>
       <LoginRegisterHeader />
       <Container size={300} mt="md">
         <Title order={4}>Log in</Title>
-        <form onSubmit={form.onSubmit(onSubmit)}>
+        <form onSubmit={form.onSubmit(login)}>
           <TextInput
             mt="sm"
             withAsterisk
@@ -63,7 +48,7 @@ const LoginPage = (props: Props) => {
             {...form.getInputProps("password")}
           />
           <Group position="center" mt="md">
-            <Button type="submit" loading={isLoading} variant="light">
+            <Button type="submit" loading={loading} variant="light">
               Log In
             </Button>
           </Group>
