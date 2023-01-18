@@ -9,7 +9,7 @@ import {
   Container,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import AuthContext from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 type Props = {};

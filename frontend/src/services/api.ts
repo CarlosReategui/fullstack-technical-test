@@ -6,6 +6,9 @@ const api = {
   login: (email: string, password: string) => {
     return axios.post(`${BASE_URL}api/token/`, { email, password });
   },
+  tokenRefresh: (refresh: string) => {
+    return axios.post(`${BASE_URL}api/token/refresh/`, { refresh });
+  },
   registerVoluntario: (body: {
     email: string;
     password: string;

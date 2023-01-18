@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router";
 import api from "../services/api";
@@ -30,7 +30,7 @@ type Props = {
 
 const AuthContext = createContext<AuthContextProps>(null!);
 
-export const AuthProvider: React.FC<Props> = ({ children }) => {
+const AuthProvider: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate();
 
   const storageAuthTokens = localStorage.getItem("authTokens");
@@ -41,27 +41,26 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     storageAuthTokens ? jwtDecode(storageAuthTokens) : null
   );
   const [loading, setLoading] = useState<boolean>(false);
+  const [tokenLoading, setTokenLoading] = useState<boolean>(false);
 
   const login = async (values: { email: string; password: string }) => {
     setLoading(true);
     try {
       const response = await api.login(values.email, values.password);
-      console.log(response.data);
       localStorage.setItem("authTokens", JSON.stringify(response.data));
       setAuthTokens(response.data);
-      setUser(jwtDecode(response.data.access));
-      if (user) {
-        switch (user.role) {
-          case "ADMIN":
-            navigate("/admin");
-            break;
-          case "ADOPTANTE":
-            navigate("/adoptante");
-            break;
-          case "VOLUNTARIO":
-            navigate("/voluntario");
-            break;
-        }
+      const newUser: IUser = jwtDecode(response.data.access);
+      setUser(newUser);
+      switch (newUser.role) {
+        case "ADMIN":
+          navigate("/admin");
+          break;
+        case "ADOPTANTE":
+          navigate("/adoptante");
+          break;
+        case "VOLUNTARIO":
+          navigate("/voluntario");
+          break;
       }
       showNotification({
         title: "Éxito",
@@ -78,29 +77,49 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setLoading(false);
   };
 
-  //   useEffect(() => {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       const decodedToken: any = jwtDecode(token);
-  //       if (decodedToken.exp * 1000 < Date.now()) {
-  //         localStorage.removeItem("token");
-  //       } else {
-  //         setUser(decodedToken);
-  //       }
-  //     }
-  //   }, []);
-
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
     navigate("/");
   };
 
+  const logoutCallback = useCallback(logout, [navigate]);
+
+  const updateToken = useCallback(async () => {
+    console.log("Update token called");
+    try {
+      const response = await api.tokenRefresh(authTokens.refresh);
+      setAuthTokens(response.data);
+      setUser(jwtDecode(response.data.access));
+      localStorage.setItem("authTokens", JSON.stringify(response.data));
+    } catch {
+      logoutCallback();
+    }
+
+    if (tokenLoading) {
+      setTokenLoading(false);
+    }
+  }, [authTokens?.refresh, tokenLoading, logoutCallback]);
+
+  useEffect(() => {
+    if (tokenLoading) {
+      updateToken();
+    }
+    const fourMinutes = 4 * 60 * 1000;
+    const interval = setInterval(() => {
+      if (authTokens) {
+        updateToken();
+      }
+    }, fourMinutes);
+    return () => clearInterval(interval);
+  }, [tokenLoading, authTokens, updateToken]);
+
   return (
     <AuthContext.Provider value={{ loading, logout, login, authTokens, user }}>
-      {children}
+      {tokenLoading ? null : children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthContext;
+export { AuthProvider, AuthContext };
+export type { AuthContextProps };
