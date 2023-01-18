@@ -1,9 +1,14 @@
 import React from "react";
+import AdminAppShell from "../components/AdminAppShell/AdminAppShell";
 
 type Props = {};
 
 const AdminPage = (props: Props) => {
-  return <div>AdminPage</div>;
+  return (
+    <div>
+      <AdminAppShell />
+    </div>
+  );
 };
 
 export default AdminPage;
