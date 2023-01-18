@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  IconGitPullRequest,
-  IconAlertCircle,
-  IconMessages,
-  IconDatabase,
-} from "@tabler/icons";
 import { MdPets } from "react-icons/md";
 import { AiFillHeart } from "react-icons/ai";
 import { RiHandHeartFill } from "react-icons/ri";

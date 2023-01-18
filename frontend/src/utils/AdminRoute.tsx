@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const AdminRoute: React.FC<Props> = ({ children }) => {
+export const AdminRoute: React.FC<Props> = ({ children }) => {
   const { user } = useContext<AuthContextProps>(AuthContext);
   const navigate = useNavigate();
 
@@ -22,5 +22,3 @@ const AdminRoute: React.FC<Props> = ({ children }) => {
 
   return <>{children}</>;
 };
-
-export default AdminRoute;

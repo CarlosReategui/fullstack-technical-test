@@ -1,9 +1,14 @@
+import React from "react";
 import { AppShell, Navbar, Header, Group, Text } from "@mantine/core";
 import { MainLinks } from "./_mainLinks";
 import { User } from "./_user";
 import { FaPaw } from "react-icons/fa";
 
-const AdminAppShell = () => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const AdminAppShell: React.FC<Props> = ({ children }) => {
   return (
     <AppShell
       padding="md"
@@ -36,7 +41,7 @@ const AdminAppShell = () => {
         },
       })}
     >
-      Your application goes here
+      {children}
     </AppShell>
   );
 };

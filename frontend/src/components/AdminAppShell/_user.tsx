@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import {
-  UnstyledButton,
   Group,
   Avatar,
   Text,
@@ -21,7 +20,7 @@ export function User() {
         borderTop: `1px solid ${theme.colors.gray[2]}`,
       }}
     >
-      <UnstyledButton
+      <Group
         sx={{
           display: "block",
           width: "100%",
@@ -52,7 +51,7 @@ export function User() {
             Logout
           </Button>
         </Group>
-      </UnstyledButton>
+      </Group>
     </Box>
   );
 }

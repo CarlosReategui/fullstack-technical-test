@@ -1,17 +1,26 @@
 import { ThemeProvider } from "./ThemeProvider";
 import { NotificationsProvider } from "@mantine/notifications";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-import HomePage from "./pages/HomePage";
-import AdminPage from "./pages/AdminPage";
-import AdoptantePage from "./pages/AdoptantePage";
-import VoluntarioPage from "./pages/VoluntarioPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import { AuthProvider } from "./context/AuthContext";
-import AdminRoute from "./utils/AdminRoute";
-import AdoptanteRoute from "./utils/AdoptanteRoute";
-import VoluntarioRoute from "./utils/VoluntarioRoute";
+
+import { AdminRoute, AdoptanteRoute, VoluntarioRoute } from "./utils/index";
+
+import {
+  AdoptantePage,
+  HomePage,
+  LoginPage,
+  NotFoundPage,
+  RegisterPage,
+  VoluntarioPage,
+} from "./pages/index";
+
+import {
+  AdminPage,
+  AdminAnimalesPage,
+  AdminAdopcionesPage,
+  AdminAdoptantesPage,
+  AdminVoluntariosPage,
+} from "./pages/AdminPages/index";
 
 export default function App() {
   return (
@@ -21,10 +30,10 @@ export default function App() {
           <AuthProvider>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
               <Route
-                path="/admin"
+                path="admin"
                 element={
                   <AdminRoute>
                     <AdminPage />
@@ -32,7 +41,39 @@ export default function App() {
                 }
               />
               <Route
-                path="/adoptante"
+                path="admin/animales"
+                element={
+                  <AdminRoute>
+                    <AdminAnimalesPage />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="admin/adopciones"
+                element={
+                  <AdminRoute>
+                    <AdminAdopcionesPage />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="admin/voluntarios"
+                element={
+                  <AdminRoute>
+                    <AdminVoluntariosPage />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="admin/adoptantes"
+                element={
+                  <AdminRoute>
+                    <AdminAdoptantesPage />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="adoptante"
                 element={
                   <AdoptanteRoute>
                     <AdoptantePage />
@@ -40,13 +81,14 @@ export default function App() {
                 }
               />
               <Route
-                path="/voluntario"
+                path="voluntario"
                 element={
                   <VoluntarioRoute>
                     <VoluntarioPage />
                   </VoluntarioRoute>
                 }
               />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </AuthProvider>
         </Router>

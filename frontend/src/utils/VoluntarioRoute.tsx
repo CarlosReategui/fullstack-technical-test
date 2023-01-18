@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const VoluntarioRoute: React.FC<Props> = ({ children }) => {
+export const VoluntarioRoute: React.FC<Props> = ({ children }) => {
   const { user } = useContext<AuthContextProps>(AuthContext);
   const navigate = useNavigate();
 
@@ -22,5 +22,3 @@ const VoluntarioRoute: React.FC<Props> = ({ children }) => {
 
   return <>{children}</>;
 };
-
-export default VoluntarioRoute;

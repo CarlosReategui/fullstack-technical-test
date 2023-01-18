@@ -14,7 +14,7 @@ import { useContext } from "react";
 
 type Props = {};
 
-const LoginPage = (props: Props) => {
+export const LoginPage = (props: Props) => {
   const { login, loading } = useContext(AuthContext);
   const form = useForm({
     initialValues: {
@@ -57,5 +57,3 @@ const LoginPage = (props: Props) => {
     </div>
   );
 };
-
-export default LoginPage;

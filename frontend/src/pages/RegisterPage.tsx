@@ -14,7 +14,7 @@ import { AuthContext } from "../context/AuthContext";
 
 type Props = {};
 
-const RegisterPage = (props: Props) => {
+export const RegisterPage = (props: Props) => {
   const { register, loading } = useContext(AuthContext);
   const form = useForm({
     initialValues: {
@@ -87,5 +87,3 @@ const RegisterPage = (props: Props) => {
     </div>
   );
 };
-
-export default RegisterPage;

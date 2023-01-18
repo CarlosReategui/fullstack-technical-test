@@ -6,7 +6,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const AdoptanteRoute: React.FC<Props> = ({ children }) => {
+export const AdoptanteRoute: React.FC<Props> = ({ children }) => {
   const { user } = useContext<AuthContextProps>(AuthContext);
   const navigate = useNavigate();
 
@@ -22,5 +22,3 @@ const AdoptanteRoute: React.FC<Props> = ({ children }) => {
 
   return <>{children}</>;
 };
-
-export default AdoptanteRoute;
