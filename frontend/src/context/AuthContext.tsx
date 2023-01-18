@@ -125,7 +125,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authTokens");
     setUser(null);
     navigate("/");
   };

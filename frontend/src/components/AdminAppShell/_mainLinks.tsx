@@ -5,6 +5,10 @@ import {
   IconMessages,
   IconDatabase,
 } from "@tabler/icons";
+import { MdPets } from "react-icons/md";
+import { AiFillHeart } from "react-icons/ai";
+import { RiHandHeartFill } from "react-icons/ri";
+import { FaDog } from "react-icons/fa";
 import { ThemeIcon, UnstyledButton, Group, Text } from "@mantine/core";
 
 interface MainLinkProps {
@@ -21,14 +25,10 @@ function MainLink({ icon, color, label }: MainLinkProps) {
         width: "100%",
         padding: theme.spacing.xs,
         borderRadius: theme.radius.sm,
-        color:
-          theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
+        color: theme.black,
 
         "&:hover": {
-          backgroundColor:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[6]
-              : theme.colors.gray[0],
+          backgroundColor: theme.colors.gray[0],
         },
       })}
     >
@@ -45,13 +45,17 @@ function MainLink({ icon, color, label }: MainLinkProps) {
 
 const data = [
   {
-    icon: <IconGitPullRequest size={16} />,
+    icon: <MdPets size={16} />,
     color: "blue",
-    label: "Pull Requests",
+    label: "Animales",
   },
-  { icon: <IconAlertCircle size={16} />, color: "teal", label: "Open Issues" },
-  { icon: <IconMessages size={16} />, color: "violet", label: "Discussions" },
-  { icon: <IconDatabase size={16} />, color: "grape", label: "Databases" },
+  { icon: <AiFillHeart size={16} />, color: "teal", label: "Adoptantes" },
+  {
+    icon: <RiHandHeartFill size={16} />,
+    color: "violet",
+    label: "Voluntarios",
+  },
+  { icon: <FaDog size={16} />, color: "grape", label: "Adopciones" },
 ];
 
 export function MainLinks() {

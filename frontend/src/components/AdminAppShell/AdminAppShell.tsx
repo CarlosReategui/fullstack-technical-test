@@ -1,6 +1,7 @@
-import { AppShell, Navbar, Header, Group } from "@mantine/core";
+import { AppShell, Navbar, Header, Group, Text } from "@mantine/core";
 import { MainLinks } from "./_mainLinks";
 import { User } from "./_user";
+import { FaPaw } from "react-icons/fa";
 
 const AdminAppShell = () => {
   return (
@@ -20,7 +21,12 @@ const AdminAppShell = () => {
       header={
         <Header height={60}>
           <Group sx={{ height: "100%" }} px={20} position="apart">
-            <p>Logo</p>
+            <Group spacing={5}>
+              <FaPaw size={20} />
+              <Text size="xl" weight={500}>
+                AdoptaUnAmigo
+              </Text>
+            </Group>
           </Group>
         </Header>
       }
