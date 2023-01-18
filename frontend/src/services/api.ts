@@ -6,6 +6,24 @@ const api = {
   login: (email: string, password: string) => {
     return axios.post(`${BASE_URL}api/token/`, { email, password });
   },
+  registerVoluntario: (body: {
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
+    role: string;
+  }) => {
+    return axios.post(`${BASE_URL}api/voluntarios/`, body);
+  },
+  registerAdoptante: (body: {
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
+    role: string;
+  }) => {
+    return axios.post(`${BASE_URL}api/adoptantes/`, body);
+  },
 };
 
 export default api;

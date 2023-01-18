@@ -30,22 +30,51 @@ const RegisterPage = (props: Props) => {
       password: (value) => (value.length > 0 ? null : "Ingrese su contraseña."),
       firstName: (value) => (value.length > 0 ? null : "Ingrese su nombre."),
       lastName: (value) => (value.length > 0 ? null : "Ingrese su apellido."),
-      role: (value) => (value == "" ? "Seleccione un rol." : null),
+      role: (value) => (value === "" ? "Seleccione un rol." : null),
     },
   });
 
-  const onSubmit = async (values: { email: string; password: string }) => {
+  const onSubmit = async (values: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+  }) => {
     setLoading(true);
-    // try {
-    //   const response = await api.login(values.email, values.password);
-    //   console.log(response.data);
-    // } catch {
-    //   showNotification({
-    //     title: "Error",
-    //     message: "Email o contraseña incorrectos.",
-    //     color: "red",
-    //   });
-    // }
+    console.log(values);
+    const body = {
+      email: values.email,
+      password: values.password,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      role: values.role,
+    };
+    try {
+      if (values.role === "ADOPTANTE") {
+        const response = await api.registerVoluntario(body);
+        console.log(response.data);
+      } else if (values.role === "VOLUNTARIO") {
+        const response = await api.registerAdoptante(body);
+        console.log(response.data);
+      }
+      showNotification({
+        title: "Éxito",
+        message: "Usuario registrado correctamente.",
+        color: "green",
+      });
+    } catch (error: any) {
+      const errors: string[] = [];
+      Object.entries(error.response.data).forEach((entry) => {
+        const [key, value] = entry;
+        errors.push(`${key}: ${value}`);
+      });
+      showNotification({
+        title: "Error",
+        message: errors.join(". "),
+        color: "red",
+      });
+    }
     setLoading(false);
   };
 
