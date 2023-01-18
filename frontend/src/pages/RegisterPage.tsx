@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import LoginRegisterHeader from "../components/Header/LoginRegisterHeader";
 import {
   TextInput,
@@ -10,13 +10,12 @@ import {
   Radio,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import api from "../services/api";
-import { showNotification } from "@mantine/notifications";
+import { AuthContext } from "../context/AuthContext";
 
 type Props = {};
 
 const RegisterPage = (props: Props) => {
-  const [isLoading, setLoading] = React.useState(false);
+  const { register, loading } = useContext(AuthContext);
   const form = useForm({
     initialValues: {
       email: "",
@@ -34,56 +33,12 @@ const RegisterPage = (props: Props) => {
     },
   });
 
-  const onSubmit = async (values: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-  }) => {
-    setLoading(true);
-    console.log(values);
-    const body = {
-      email: values.email,
-      password: values.password,
-      first_name: values.firstName,
-      last_name: values.lastName,
-      role: values.role,
-    };
-    try {
-      if (values.role === "ADOPTANTE") {
-        const response = await api.registerAdoptante(body);
-        console.log(response.data);
-      } else if (values.role === "VOLUNTARIO") {
-        const response = await api.registerVoluntario(body);
-        console.log(response.data);
-      }
-      showNotification({
-        title: "Éxito",
-        message: "Usuario registrado correctamente.",
-        color: "green",
-      });
-    } catch (error: any) {
-      const errors: string[] = [];
-      Object.entries(error.response.data).forEach((entry) => {
-        const [key, value] = entry;
-        errors.push(`${key}: ${value}`);
-      });
-      showNotification({
-        title: "Error",
-        message: errors.join(". "),
-        color: "red",
-      });
-    }
-    setLoading(false);
-  };
-
   return (
     <div>
       <LoginRegisterHeader />
       <Container size={300} mt="md">
         <Title order={4}>Registro</Title>
-        <form onSubmit={form.onSubmit(onSubmit)}>
+        <form onSubmit={form.onSubmit(register)}>
           <TextInput
             mt="sm"
             withAsterisk
@@ -123,7 +78,7 @@ const RegisterPage = (props: Props) => {
             <Radio value="VOLUNTARIO" label="Voluntario" />
           </Radio.Group>
           <Group position="center" mt="md">
-            <Button type="submit" loading={isLoading} variant="light">
+            <Button type="submit" loading={loading} variant="light">
               Sign Up
             </Button>
           </Group>

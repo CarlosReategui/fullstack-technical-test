@@ -22,6 +22,13 @@ interface AuthContextProps {
   login: (values: { email: string; password: string }) => void;
   authTokens: { access: string; refresh: string } | null;
   user: IUser | null;
+  register: (values: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+  }) => void;
 }
 
 type Props = {
@@ -77,6 +84,46 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     setLoading(false);
   };
 
+  const register = async (values: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+  }) => {
+    setLoading(true);
+    console.log(values);
+    const body = {
+      email: values.email,
+      password: values.password,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      role: values.role,
+    };
+    try {
+      if (values.role === "ADOPTANTE") {
+        const response = await api.registerAdoptante(body);
+        console.log(response.data);
+      } else if (values.role === "VOLUNTARIO") {
+        const response = await api.registerVoluntario(body);
+        console.log(response.data);
+      }
+      await login({ email: values.email, password: values.password });
+    } catch (error: any) {
+      const errors: string[] = [];
+      Object.entries(error.response.data).forEach((entry) => {
+        const [key, value] = entry;
+        errors.push(`${key}: ${value}`);
+      });
+      showNotification({
+        title: "Error",
+        message: errors.join(". "),
+        color: "red",
+      });
+    }
+    setLoading(false);
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -115,7 +162,9 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   }, [tokenLoading, authTokens, updateToken]);
 
   return (
-    <AuthContext.Provider value={{ loading, logout, login, authTokens, user }}>
+    <AuthContext.Provider
+      value={{ loading, logout, login, register, authTokens, user }}
+    >
       {tokenLoading ? null : children}
     </AuthContext.Provider>
   );
