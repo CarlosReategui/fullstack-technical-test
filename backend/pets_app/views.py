@@ -17,11 +17,28 @@ def custom_update(self, request, pk=None):
     return Response(serializer.data)
 
 
+class ActionBasedPermission(permissions.AllowAny):
+    """
+    Grant or deny access to a view, based on a mapping in view.action_permissions
+    """
+
+    def has_permission(self, request, view):
+        for klass, actions in getattr(view, 'action_permissions', {}).items():
+            if view.action in actions:
+                return klass().has_permission(request, view)
+        return False
+
+
 class AdoptanteViewSet(viewsets.ModelViewSet):
     queryset = Adoptante.objects.filter(role='ADOPTANTE')
     serializer_class = AdoptanteSerializer
     authentication_classes = [JWTAuthentication, BasicAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [ActionBasedPermission, ]
+    action_permissions = {
+        permissions.IsAuthenticated: ['update', 'partial_update', 'list', 'retrieve'],
+        permissions.IsAdminUser: ['destroy'],
+        permissions.AllowAny: ['create']
+    }
 
     def update(self, request, pk=None):
         return custom_update(self, request, pk)
@@ -31,7 +48,12 @@ class VoluntarioViewSet(viewsets.ModelViewSet):
     queryset = Voluntario.objects.filter(role='VOLUNTARIO')
     serializer_class = VoluntarioSerializer
     authentication_classes = [JWTAuthentication, BasicAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [ActionBasedPermission, ]
+    action_permissions = {
+        permissions.IsAuthenticated: ['update', 'partial_update', 'list', 'retrieve'],
+        permissions.IsAdminUser: ['destroy'],
+        permissions.AllowAny: ['create']
+    }
 
     def update(self, request, pk=None):
         return custom_update(self, request, pk)
