@@ -8,6 +8,7 @@ import {
   Button,
 } from "@mantine/core";
 import { AuthContext } from "../../context/AuthContext";
+import { MdLogout } from "react-icons/md";
 
 export function User() {
   const theme = useMantineTheme();
@@ -47,7 +48,7 @@ export function User() {
             </Text>
           </Box>
           <Button size="xs" variant="light" color="dark" onClick={logout}>
-            Logout
+            <MdLogout />
           </Button>
         </Group>
       </Group>
