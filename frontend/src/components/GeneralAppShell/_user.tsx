@@ -50,8 +50,6 @@ export function User() {
             Logout
           </Button>
         </Group>
-        {/* <Group position="left" mt="sm">
-        </Group> */}
       </Group>
     </Box>
   );

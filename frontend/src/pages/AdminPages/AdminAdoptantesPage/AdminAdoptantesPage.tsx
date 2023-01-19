@@ -89,7 +89,7 @@ export const AdminAdoptantesPage = (props: Props) => {
           size={300}
           onClose={() => setDeleteModalOpened(false)}
         >
-          <Title order={3}>¿Seguro que desea borrar el Adoptante?</Title>
+          <Title order={3}>¿Seguro que desea borrar el adoptante?</Title>
           <Group mt="lg" position="center">
             <Button
               onClick={() => onClickAcceptDelete(id)}

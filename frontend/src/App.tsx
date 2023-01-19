@@ -11,7 +11,6 @@ import {
   LoginPage,
   NotFoundPage,
   RegisterPage,
-  VoluntarioPage,
 } from "./pages/index";
 
 import {
@@ -21,6 +20,13 @@ import {
   AdminAdoptantesPage,
   AdminVoluntariosPage,
 } from "./pages/AdminPages/index";
+
+import {
+  VoluntarioPage,
+  VoluntarioAdopcionesPage,
+  VoluntarioAdoptantesPage,
+  VoluntarioAnimalesPage,
+} from "./pages/VoluntarioPages/index";
 
 export default function App() {
   return (
@@ -85,6 +91,30 @@ export default function App() {
                 element={
                   <VoluntarioRoute>
                     <VoluntarioPage />
+                  </VoluntarioRoute>
+                }
+              />
+              <Route
+                path="voluntario/animales"
+                element={
+                  <VoluntarioRoute>
+                    <VoluntarioAnimalesPage />
+                  </VoluntarioRoute>
+                }
+              />
+              <Route
+                path="voluntario/adoptantes"
+                element={
+                  <VoluntarioRoute>
+                    <VoluntarioAdoptantesPage />
+                  </VoluntarioRoute>
+                }
+              />
+              <Route
+                path="voluntario/adopciones"
+                element={
+                  <VoluntarioRoute>
+                    <VoluntarioAdopcionesPage />
                   </VoluntarioRoute>
                 }
               />
