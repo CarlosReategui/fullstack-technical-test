@@ -1,8 +1,8 @@
 import axios from "axios";
 import { TAnimal, TUser } from "../types";
 
-const BASE_URL = "http://localhost:8000/";
-// const BASE_URL = "https://pets-app.onrender.com/";
+// const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "https://pets-app.onrender.com/";
 
 const ApiWithToken = axios.create({
   headers: {
