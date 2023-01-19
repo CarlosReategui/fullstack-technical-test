@@ -100,6 +100,12 @@ const api = {
     misAdopciones: () => {
       return ApiWithToken.get(`${BASE_URL}api/misAdopciones/`);
     },
+    adoptanteCrearAdopcion: (voluntarioId: number, animalId: number) => {
+      return ApiWithToken.post(`${BASE_URL}api/adoptanteCrearAdopcion/`, {
+        voluntario_id: voluntarioId,
+        animal_id: animalId,
+      });
+    },
   },
 };
 

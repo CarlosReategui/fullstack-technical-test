@@ -5,7 +5,6 @@ import {
   Text,
   Box,
   useMantineTheme,
-  Button,
   Menu,
   UnstyledButton,
 } from "@mantine/core";

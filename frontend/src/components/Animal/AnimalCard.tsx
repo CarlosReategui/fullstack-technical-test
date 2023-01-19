@@ -5,9 +5,10 @@ import { TAnimal } from "../../types";
 
 type Props = {
   animal: TAnimal;
+  openModal: (animal: TAnimal) => void;
 };
 
-const AnimalCard = ({ animal }: Props) => {
+const AnimalCard = ({ animal, openModal }: Props) => {
   return (
     <Card shadow="sm" p="lg" radius="md" withBorder>
       <Card.Section>
@@ -23,7 +24,14 @@ const AnimalCard = ({ animal }: Props) => {
         <List.Item>{animal.raza}</List.Item>
         <List.Item>{animal.edad} año(s)</List.Item>
       </List>
-      <Button variant="light" color="blue" mt="md" radius="md" fullWidth>
+      <Button
+        variant="light"
+        color="blue"
+        mt="md"
+        radius="md"
+        fullWidth
+        onClick={() => openModal(animal)}
+      >
         Adoptar
       </Button>
     </Card>

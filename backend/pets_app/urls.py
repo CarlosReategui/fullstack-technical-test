@@ -1,4 +1,4 @@
-from .views import AdoptanteViewSet, VoluntarioViewSet, AnimalViewSet, AdopcionViewSet, MyTokenObtainPairView, MyAdoptionsViewSet, NotAdoptedAnimalsViewSet
+from .views import AdoptanteViewSet, VoluntarioViewSet, AnimalViewSet, AdopcionViewSet, MyTokenObtainPairView, MyAdoptionsViewSet, NotAdoptedAnimalsViewSet, MakeAdoptionViewSet
 
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
@@ -17,7 +17,9 @@ urlpatterns = [
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('misAdopciones/',
-         MyAdoptionsViewSet.as_view(), name='misAdopciones'),
+         MyAdoptionsViewSet.as_view(), name='mis_adopciones'),
     path('animalesNoAdoptados/', NotAdoptedAnimalsViewSet.as_view(),
-         name='animalesNoAdoptados')
+         name='animales_no_adoptados'),
+    path('adoptanteCrearAdopcion/', MakeAdoptionViewSet.as_view(),
+         name='adoptante_crear_adopcion')
 ]

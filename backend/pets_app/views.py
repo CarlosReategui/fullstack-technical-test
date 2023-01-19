@@ -106,3 +106,31 @@ class NotAdoptedAnimalsViewSet(APIView):
         serializer = AnimalSerializer(animals, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class MakeAdoptionViewSet(APIView):
+    serializer_class = AdopcionSerializer
+    authentication_classes = [JWTAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        try:
+            adoptante = Adoptante.objects.get(id=self.request.user.id)
+
+            animal = Animal.objects.get(id=request.data.get('animal_id'))
+            voluntario = Voluntario.objects.get(
+                id=request.data.get('voluntario_id'))
+
+            if animal.estado != 'EN_ADOPCION':
+                return Response({'message': 'El animal no esta disponible para ser adoptado'}, status=status.HTTP_400_BAD_REQUEST)
+
+            adopcion = Adopcion.objects.create(
+                adoptante=adoptante, animal=animal, voluntario=voluntario)
+            adopcion.save()
+
+            animal.estado = 'EN_ESPERA_DE_ADOPCION'
+            animal.save()
+
+            return Response({'message': 'Adopcion realizada con exito'}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'message': 'Error al realizar la adopcion'}, status=status.HTTP_400_BAD_REQUEST)
