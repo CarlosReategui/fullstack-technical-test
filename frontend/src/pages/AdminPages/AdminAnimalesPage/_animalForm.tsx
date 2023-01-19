@@ -144,7 +144,7 @@ export const AddAnimalForm = (props: Props) => {
           withAsterisk
           mt="sm"
           label="Foto URL"
-          placeholder="Foto URL"
+          placeholder="Foto URL (menos de 200 caracteres)"
           {...form.getInputProps("foto")}
         />
         <Group position="center" mt="md">

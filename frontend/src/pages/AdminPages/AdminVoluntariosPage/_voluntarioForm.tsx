@@ -27,7 +27,7 @@ const createInitialValues = {
   first_name: "",
   last_name: "",
   email: "",
-  is_active: true,
+  is_active: false,
   password: "",
 };
 
@@ -60,6 +60,7 @@ export const AddVoluntarioForm = (props: Props) => {
     if (!props.initialValues) {
       try {
         user.password = values.password;
+        user.is_active = true;
         await api.voluntarios.post(user);
         navigate(0);
       } catch {
@@ -125,7 +126,14 @@ export const AddVoluntarioForm = (props: Props) => {
             {...form.getInputProps("password")}
           />
         )}
-        <Switch mt="sm" label="Activo" {...form.getInputProps("is_active")} />
+        {props.initialValues && (
+          <Switch
+            mt="sm"
+            label="Activo"
+            {...form.getInputProps("is_active")}
+            checked={form.values.is_active}
+          />
+        )}
         <Group position="center" mt="md">
           <Button type="submit" loading={loading} variant="light">
             {props.initialValues ? "Actualizar" : "Crear"}

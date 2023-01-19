@@ -27,7 +27,7 @@ const createInitialValues = {
   first_name: "",
   last_name: "",
   email: "",
-  is_active: true,
+  is_active: false,
   password: "",
 };
 
@@ -56,17 +56,17 @@ export const AddAdoptanteForm = (props: Props) => {
       email: values.email,
     };
     let success = true;
-    console.log("entre al on submit");
     if (!props.initialValues) {
       try {
         user.password = values.password;
+        user.is_active = true;
         await api.adoptantes.post(user);
         navigate(0);
       } catch {
         success = false;
       }
     } else {
-      console.log("trate hacer put");
+      console.log(user);
       if (props.id) {
         try {
           await api.adoptantes.put(user, props.id);
@@ -125,7 +125,14 @@ export const AddAdoptanteForm = (props: Props) => {
             {...form.getInputProps("password")}
           />
         )}
-        <Switch mt="sm" label="Activo" {...form.getInputProps("is_active")} />
+        {props.initialValues && (
+          <Switch
+            mt="sm"
+            label="Activo"
+            {...form.getInputProps("is_active")}
+            checked={form.values.is_active}
+          />
+        )}
         <Group position="center" mt="md">
           <Button type="submit" loading={loading} variant="light">
             {props.initialValues ? "Actualizar" : "Crear"}
