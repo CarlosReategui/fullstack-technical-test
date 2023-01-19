@@ -48,7 +48,7 @@ const api = {
   }) => {
     return axios.post(`${BASE_URL}api/adoptantes/`, body);
   },
-  animal: {
+  animales: {
     post: (animal: TAnimal) => {
       return ApiWithToken.post(`${BASE_URL}api/animales/`, animal);
     },
@@ -62,10 +62,10 @@ const api = {
       return ApiWithToken.delete(`${BASE_URL}api/animales/${id}/`);
     },
     getNoAdoptados: () => {
-      return ApiWithToken.get(`${BASE_URL}api/animalesNAdoptados/`);
+      return ApiWithToken.get(`${BASE_URL}api/animalesNoAdoptados/`);
     },
   },
-  adoptante: {
+  adoptantes: {
     post: (adoptante: TUser) => {
       return ApiWithToken.post(`${BASE_URL}api/adoptantes/`, adoptante);
     },

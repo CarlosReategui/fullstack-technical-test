@@ -60,7 +60,7 @@ export const AddAdoptanteForm = (props: Props) => {
     if (!props.initialValues) {
       try {
         user.password = values.password;
-        await api.adoptante.post(user);
+        await api.adoptantes.post(user);
         navigate(0);
       } catch {
         success = false;
@@ -69,7 +69,7 @@ export const AddAdoptanteForm = (props: Props) => {
       console.log("trate hacer put");
       if (props.id) {
         try {
-          await api.adoptante.put(user, props.id);
+          await api.adoptantes.put(user, props.id);
           navigate(0);
         } catch {
           success = false;

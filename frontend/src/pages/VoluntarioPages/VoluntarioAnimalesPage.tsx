@@ -15,7 +15,7 @@ export const VoluntarioAnimalesPage = (props: Props) => {
 
   const getAnimales = useCallback(async () => {
     try {
-      const response = await api.animal.get();
+      const response = await api.animales.get();
       setAnimales(response.data);
       console.log(response.data);
     } catch {
@@ -35,7 +35,7 @@ export const VoluntarioAnimalesPage = (props: Props) => {
     if (value) animal.estado = value;
     if (animal.id) {
       try {
-        await api.animal.put(animal, animal.id);
+        await api.animales.put(animal, animal.id);
         getAnimales();
       } catch {
         logout();

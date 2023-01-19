@@ -23,7 +23,7 @@ export const AdminAdoptantesPage = (props: Props) => {
 
   const getAdoptantes = useCallback(async () => {
     try {
-      const response = await api.adoptante.get();
+      const response = await api.adoptantes.get();
       setAdoptantes(response.data);
     } catch {
       logout();
@@ -59,7 +59,7 @@ export const AdminAdoptantesPage = (props: Props) => {
   const onClickAcceptDelete = async (id: number | undefined) => {
     if (id) {
       try {
-        await api.adoptante.delete(id);
+        await api.adoptantes.delete(id);
         navigate(0);
       } catch {
         showNotification({

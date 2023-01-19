@@ -25,7 +25,7 @@ export const AdminAnimalesPage = (props: Props) => {
 
   const getAnimals = useCallback(async () => {
     try {
-      const response = await api.animal.get();
+      const response = await api.animales.get();
       setAnimales(response.data);
     } catch {
       logout();
@@ -54,7 +54,7 @@ export const AdminAnimalesPage = (props: Props) => {
   const onClickAcceptDelete = async (id: number | undefined) => {
     if (id) {
       try {
-        await api.animal.delete(id);
+        await api.animales.delete(id);
         navigate(0);
       } catch {
         showNotification({

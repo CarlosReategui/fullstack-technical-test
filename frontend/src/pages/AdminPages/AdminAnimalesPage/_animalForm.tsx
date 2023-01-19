@@ -64,7 +64,7 @@ export const AddAnimalForm = (props: Props) => {
     let success = true;
     if (!props.initialValues) {
       try {
-        await api.animal.post(animal);
+        await api.animales.post(animal);
         navigate(0);
       } catch {
         success = false;
@@ -72,7 +72,7 @@ export const AddAnimalForm = (props: Props) => {
     } else {
       if (props.id) {
         try {
-          await api.animal.put(animal, props.id);
+          await api.animales.put(animal, props.id);
           navigate(0);
         } catch {
           success = false;

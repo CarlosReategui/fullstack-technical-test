@@ -47,7 +47,7 @@ export function User() {
               {user?.email}
             </Text>
           </Box>
-          <Button size="xs" variant="light" color="dark" onClick={logout}>
+          <Button size="xs" variant="light" color="gray" onClick={logout}>
             <MdLogout />
           </Button>
         </Group>

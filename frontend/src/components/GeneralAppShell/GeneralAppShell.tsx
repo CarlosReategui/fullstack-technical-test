@@ -23,7 +23,7 @@ const GeneralAppShell: React.FC<Props> = ({ children, mainLinks, user }) => {
   return (
     <AppShell
       padding="md"
-      navbarOffsetBreakpoint="sm"
+      navbarOffsetBreakpoint="xs"
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar
@@ -43,11 +43,11 @@ const GeneralAppShell: React.FC<Props> = ({ children, mainLinks, user }) => {
           <div
             style={{ display: "flex", alignItems: "center", height: "100%" }}
           >
-            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+            <MediaQuery largerThan="xs" styles={{ display: "none" }}>
               <Burger
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
-                size="sm"
+                size="xs"
                 color={theme.colors.gray[6]}
                 mr="xl"
               />

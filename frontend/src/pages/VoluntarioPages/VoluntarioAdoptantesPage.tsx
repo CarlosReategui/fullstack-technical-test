@@ -13,7 +13,7 @@ export const VoluntarioAdoptantesPage = (props: Props) => {
 
   const getAdoptantes = useCallback(async () => {
     try {
-      const response = await api.adoptante.get();
+      const response = await api.adoptantes.get();
       setAdoptantes(response.data);
       console.log(response.data);
     } catch {
