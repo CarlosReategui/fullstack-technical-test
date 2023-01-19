@@ -38,7 +38,7 @@ export const VoluntarioAdopcionesPage = (props: Props) => {
             <th>Adoptante</th>
             <th>Voluntario</th>
             <th>Fecha</th>
-            <th>Finalizado</th>
+            <th>Estado animal</th>
           </tr>
         </thead>
         {adopciones && (
@@ -46,15 +46,12 @@ export const VoluntarioAdopcionesPage = (props: Props) => {
             {adopciones.map((adopcion) => (
               <tr key={adopcion.id}>
                 <td>{adopcion.animal.nombre}</td>
-                <td>{adopcion.adoptante.email}</td>
-                <td>{adopcion.voluntario.email}</td>
+                <td>{`${adopcion.adoptante.first_name} ${adopcion.adoptante.last_name} | ${adopcion.adoptante.email}`}</td>
+                <td>{`${adopcion.voluntario.first_name} ${adopcion.voluntario.last_name} | ${adopcion.adoptante.email}`}</td>
                 <td>{adopcion.fecha}</td>
                 <td>
-                  <Badge
-                    color={adopcion.finalizado ? "teal" : "red"}
-                    variant="light"
-                  >
-                    {adopcion.finalizado ? "Sí" : "No"}
+                  <Badge color="teal" variant="light">
+                    {adopcion.animal.estado}
                   </Badge>
                 </td>
               </tr>
