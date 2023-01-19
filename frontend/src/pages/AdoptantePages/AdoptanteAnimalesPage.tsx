@@ -39,27 +39,6 @@ export const AdoptanteAnimalesPage = (props: Props) => {
             <AnimalCard animal={animal} />
           </Col>
         ))}
-        {/* <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col>
-        <Col md={4} sm={6}>
-          animal
-        </Col> */}
       </Grid>
     </AdoptanteAppShell>
   );
