@@ -76,6 +76,20 @@ const api = {
       return ApiWithToken.delete(`${BASE_URL}api/adoptantes/${id}/`);
     },
   },
+  voluntario: {
+    post: (voluntario: TUser) => {
+      return ApiWithToken.post(`${BASE_URL}api/voluntarios/`, voluntario);
+    },
+    get: () => {
+      return ApiWithToken.get(`${BASE_URL}api/voluntarios/`);
+    },
+    put: (voluntario: TUser, id: number) => {
+      return ApiWithToken.put(`${BASE_URL}api/voluntarios/${id}/`, voluntario);
+    },
+    delete: (id: number) => {
+      return ApiWithToken.delete(`${BASE_URL}api/voluntarios/${id}/`);
+    },
+  },
 };
 
 export default api;

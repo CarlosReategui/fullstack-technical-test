@@ -46,11 +46,12 @@ export function User() {
               {user?.email}
             </Text>
           </Box>
-
-          <Button variant="light" color="dark" onClick={logout}>
+          <Button size="xs" variant="light" color="dark" onClick={logout}>
             Logout
           </Button>
         </Group>
+        {/* <Group position="left" mt="sm">
+        </Group> */}
       </Group>
     </Box>
   );
