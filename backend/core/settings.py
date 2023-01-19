@@ -35,7 +35,8 @@ DEBUG = 'RENDER' not in os.environ
 ALLOWED_HOSTS = []
 
 CORS_ALLOWED_ORIGINS = [
-    'https://adoptaunamigo-rho.vercel.app'
+    'https://adoptaunamigo-rho.vercel.app',
+    'http://localhost:3000',
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
