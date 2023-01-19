@@ -53,7 +53,7 @@ const GeneralAppShell: React.FC<Props> = ({ children, mainLinks, user }) => {
               />
             </MediaQuery>
 
-            <Group sx={{ height: "100%" }} px={20} position="apart">
+            <Group sx={{ height: "100%" }} px={10} position="apart">
               <Group spacing={5}>
                 <FaPaw size={20} />
                 <Text size="xl" weight={500}>

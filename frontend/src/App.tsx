@@ -5,13 +5,13 @@ import { AuthProvider } from "./context/AuthContext";
 
 import { AdminRoute, AdoptanteRoute, VoluntarioRoute } from "./utils/index";
 
+import { HomePage, LoginPage, NotFoundPage, RegisterPage } from "./pages/index";
+
 import {
   AdoptantePage,
-  HomePage,
-  LoginPage,
-  NotFoundPage,
-  RegisterPage,
-} from "./pages/index";
+  AdoptanteAnimalesPage,
+  AdoptanteMisAdopcionesPage,
+} from "./pages/AdoptantePages";
 
 import {
   AdminPage,
@@ -83,6 +83,22 @@ export default function App() {
                 element={
                   <AdoptanteRoute>
                     <AdoptantePage />
+                  </AdoptanteRoute>
+                }
+              />
+              <Route
+                path="adoptante/animales"
+                element={
+                  <AdoptanteRoute>
+                    <AdoptanteAnimalesPage />
+                  </AdoptanteRoute>
+                }
+              />
+              <Route
+                path="adoptante/misAdopciones"
+                element={
+                  <AdoptanteRoute>
+                    <AdoptanteMisAdopcionesPage />
                   </AdoptanteRoute>
                 }
               />

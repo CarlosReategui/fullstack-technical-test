@@ -64,10 +64,10 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
           navigate("/admin/animales");
           break;
         case "ADOPTANTE":
-          navigate("/adoptante");
+          navigate("/adoptante/animales");
           break;
         case "VOLUNTARIO":
-          navigate("/voluntario");
+          navigate("/voluntario/animales");
           break;
       }
       showNotification({

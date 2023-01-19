@@ -1,4 +1,4 @@
-export { AdoptantePage } from "./AdoptantePage";
+export { AdoptantePage } from "./AdoptantePages/AdoptantePage";
 export { HomePage } from "./HomePage";
 export { LoginPage } from "./LoginPage";
 export { NotFoundPage } from "./NotFoundPage";
