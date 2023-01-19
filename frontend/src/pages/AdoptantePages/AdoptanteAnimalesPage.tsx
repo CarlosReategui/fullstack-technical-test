@@ -1,5 +1,4 @@
 import { Button, Grid, Modal, Select, Title } from "@mantine/core";
-import { showNotification } from "@mantine/notifications";
 import React, { useCallback, useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import AdoptanteAppShell from "../../components/AdoptanteAppShell/AdoptanteAppShell";
