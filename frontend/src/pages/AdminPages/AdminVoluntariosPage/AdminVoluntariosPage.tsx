@@ -147,7 +147,7 @@ export const AdminVoluntariosPage = (props: Props) => {
                   </td>
                   <td>
                     <Button
-                      color="teal"
+                      color="blue"
                       variant="light"
                       onClick={() => setEditValues(voluntario, voluntario.id)}
                     >

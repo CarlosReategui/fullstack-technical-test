@@ -3,11 +3,13 @@ import React, { useCallback, useContext, useEffect } from "react";
 import VoluntarioAppShell from "../../components/VoluntarioAppShell/VoluntarioAppShell";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../services/api";
+import { animalImageStyles } from "../../styles";
 import { TAnimal } from "../../types";
 
 type Props = {};
 
 export const VoluntarioAnimalesPage = (props: Props) => {
+  const { classes } = animalImageStyles();
   const { logout } = useContext(AuthContext);
   const [animales, setAnimales] = React.useState<[TAnimal] | null>(null);
 
@@ -61,18 +63,20 @@ export const VoluntarioAnimalesPage = (props: Props) => {
               <tr key={animal.id}>
                 <td>{animal.nombre}</td>
                 <td>
-                  <Badge
-                    color="blue"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => window.open(animal.foto)}
-                  >
-                    ver
-                  </Badge>
+                  <div className={classes.container}>
+                    <img
+                      className={classes.resizeFitCenter}
+                      src={animal.foto}
+                      alt="Foto"
+                    />
+                  </div>
                 </td>
                 <td>{animal.edad}</td>
                 <td>{animal.raza}</td>
                 <td>
-                  <Badge color="orange">{animal.tipo}</Badge>
+                  <Badge color={animal.tipo === "PERRO" ? "lime" : "orange"}>
+                    {animal.tipo}
+                  </Badge>
                 </td>
                 <td>
                   <Select

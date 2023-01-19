@@ -132,7 +132,7 @@ class Animal(models.Model):
     tipo = models.CharField(max_length=15, choices=Tipo.choices, null=False)
     # TODO: Cambiar la imagen por defecto a dinámica
     foto = models.URLField(
-        null=False, default="https://static.guiaongs.org/wp-content/uploads/2016/07/Adopta.jpg")
+        null=False, default="https://mas-can.es/wp-content/uploads/2018/08/Alfredo-2011-albergue-oviedo.jpg")
 
     class Estado(models.TextChoices):
         ADOPTADO = 'ADOPTADO', 'Adoptado'

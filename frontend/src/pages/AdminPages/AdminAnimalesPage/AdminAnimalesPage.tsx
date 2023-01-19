@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import AdminAppShell from "../../../components/AdminAppShell/AdminAppShell";
 import { AuthContext } from "../../../context/AuthContext";
 import api from "../../../services/api";
+import { useAnimalImageStyles } from "../../../styles/animalImageStyles";
 import { TAnimal } from "../../../types";
 import { AddAnimalForm, TForm } from "./_animalForm";
 
@@ -20,6 +21,7 @@ export const AdminAnimalesPage = (props: Props) => {
   const { logout } = useContext(AuthContext);
   const [formValues, setFormValues] = React.useState<TForm | null>(null);
   const [id, setId] = React.useState<number | undefined>(undefined);
+  const { classes } = useAnimalImageStyles();
 
   const getAnimals = useCallback(async () => {
     try {
@@ -129,25 +131,37 @@ export const AdminAnimalesPage = (props: Props) => {
                 <tr key={animal.id}>
                   <td>{animal.nombre}</td>
                   <td>
-                    <Badge
-                      color="blue"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => window.open(animal.foto)}
-                    >
-                      ver
-                    </Badge>
+                    <div className={classes.container}>
+                      <img
+                        className={classes.resizeFitCenter}
+                        src={animal.foto}
+                        alt="Foto"
+                      />
+                    </div>
                   </td>
                   <td>{animal.edad}</td>
                   <td>{animal.raza}</td>
                   <td>
-                    <Badge color="orange">{animal.tipo}</Badge>
+                    <Badge color={animal.tipo === "PERRO" ? "green" : "orange"}>
+                      {animal.tipo}
+                    </Badge>
                   </td>
                   <td>
-                    <Badge color="cyan">{animal.estado}</Badge>
+                    <Badge
+                      color={
+                        animal.estado === "EN_ADOPCION"
+                          ? "cyan"
+                          : animal.estado === "ADOPTADO"
+                          ? "pink"
+                          : "grape"
+                      }
+                    >
+                      {animal.estado}
+                    </Badge>
                   </td>
                   <td>
                     <Button
-                      color="teal"
+                      color="blue"
                       variant="light"
                       onClick={() => setEditValues(animal, animal.id)}
                     >
