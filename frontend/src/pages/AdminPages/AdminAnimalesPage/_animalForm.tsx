@@ -19,6 +19,7 @@ export type TForm = {
   raza: string;
   tipo: string;
   estado: string;
+  foto: string;
 };
 
 type Props = { initialValues: TForm | null; id: number | undefined };
@@ -29,6 +30,7 @@ const createInitialValues = {
   raza: "",
   tipo: "PERRO",
   estado: "ADOPTADO",
+  foto: "",
 };
 
 export const AddAnimalForm = (props: Props) => {
@@ -42,6 +44,7 @@ export const AddAnimalForm = (props: Props) => {
       raza: (value) => (value.length > 0 ? null : "Ingrese la raza."),
       tipo: (value) => (value !== "" ? null : "Ingrese el tipo."),
       estado: (value) => (value !== "" ? null : "Ingrese el estado."),
+      foto: (value) => (value.length > 0 ? null : "Ingrese la foto."),
     },
   });
 
@@ -55,7 +58,9 @@ export const AddAnimalForm = (props: Props) => {
       edad: values.edad,
       tipo: values.tipo,
       estado: values.estado,
+      foto: values.foto,
     };
+    console.log("submit", animal);
     let success = true;
     if (!props.initialValues) {
       try {
@@ -101,18 +106,21 @@ export const AddAnimalForm = (props: Props) => {
           {...form.getInputProps("nombre")}
         />
         <NumberInput
+          withAsterisk
           mt="sm"
           label="Edad"
           placeholder="Edad"
           {...form.getInputProps("edad")}
         />
         <TextInput
+          withAsterisk
           mt="sm"
           label="Raza"
           placeholder="Raza"
           {...form.getInputProps("raza")}
         />
         <Select
+          withAsterisk
           {...form.getInputProps("tipo")}
           mt="sm"
           label="Tipo"
@@ -122,6 +130,7 @@ export const AddAnimalForm = (props: Props) => {
           ]}
         />
         <Select
+          withAsterisk
           {...form.getInputProps("estado")}
           mt="sm"
           label="Estado"
@@ -130,6 +139,13 @@ export const AddAnimalForm = (props: Props) => {
             { value: "EN_ADOPCION", label: "En adopción" },
             { value: "EN_ESPERA_DE_ADOPCION", label: "En espera de adopción" },
           ]}
+        />
+        <TextInput
+          withAsterisk
+          mt="sm"
+          label="Foto URL"
+          placeholder="Foto URL"
+          {...form.getInputProps("foto")}
         />
         <Group position="center" mt="md">
           <Button type="submit" loading={loading} variant="light">

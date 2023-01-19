@@ -153,7 +153,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     if (tokenLoading) {
       updateTokenElseLogout();
     }
-    const minutes = 12 * 60 * 1000;
+    const minutes = 1 * 60 * 1000;
     const interval = setInterval(() => {
       if (authTokens) {
         updateTokenElseLogout();

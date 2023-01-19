@@ -114,6 +114,7 @@ export const AdminAnimalesPage = (props: Props) => {
           <thead>
             <tr>
               <th>Nombre</th>
+              <th>Foto</th>
               <th>Edad</th>
               <th>Raza</th>
               <th>Tipo</th>
@@ -127,6 +128,15 @@ export const AdminAnimalesPage = (props: Props) => {
               {animales.map((animal) => (
                 <tr key={animal.id}>
                   <td>{animal.nombre}</td>
+                  <td>
+                    <Badge
+                      color="blue"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => window.open(animal.foto)}
+                    >
+                      ver
+                    </Badge>
+                  </td>
                   <td>{animal.edad}</td>
                   <td>{animal.raza}</td>
                   <td>

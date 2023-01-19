@@ -129,6 +129,9 @@ class Animal(models.Model):
         GATO = 'GATO', 'Gato'
 
     tipo = models.CharField(max_length=15, choices=Tipo.choices, null=False)
+    # TODO: Cambiar la imagen por defecto a dinámica
+    foto = models.URLField(
+        null=False, default="https://static.guiaongs.org/wp-content/uploads/2016/07/Adopta.jpg")
 
     class Estado(models.TextChoices):
         ADOPTADO = 'ADOPTADO', 'Adoptado'

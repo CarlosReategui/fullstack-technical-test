@@ -5,4 +5,5 @@ export type TAnimal = {
   raza: string;
   tipo: string;
   estado: string;
+  foto: string;
 };
