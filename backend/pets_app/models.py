@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
@@ -161,7 +162,7 @@ class Adopcion(models.Model):
     voluntario = models.ForeignKey(
         Voluntario, on_delete=models.CASCADE, related_name="Voluntario", null=False)
     finalizado = models.BooleanField(default=False)
-    fecha = models.DateField(null=False)
+    fecha = models.DateField(null=False, default=timezone.now)
 
     def __str__(self):
         return f'{self.adoptante.email} - {self.voluntario.email} - {self.animal.nombre}'

@@ -62,6 +62,10 @@ class AnimalSerializer(serializers.ModelSerializer):
 
 
 class AdopcionSerializer(serializers.ModelSerializer):
+    adoptante = AdoptanteSerializer()
+    animal = AnimalSerializer()
+    voluntario = VoluntarioSerializer()
+
     class Meta:
         model = Adopcion
         fields = '__all__'

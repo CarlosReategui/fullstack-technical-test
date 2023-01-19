@@ -48,7 +48,6 @@ export const VoluntarioAdoptantesPage = (props: Props) => {
                 <td>{adoptante.last_name}</td>
                 <td>{adoptante.email}</td>
                 <td>
-                  {" "}
                   <Badge
                     color={adoptante.is_active ? "teal" : "red"}
                     variant="light"

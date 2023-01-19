@@ -90,6 +90,11 @@ const api = {
       return ApiWithToken.delete(`${BASE_URL}api/voluntarios/${id}/`);
     },
   },
+  adopciones: {
+    get: () => {
+      return ApiWithToken.get(`${BASE_URL}api/adopciones/`);
+    },
+  },
 };
 
 export default api;
