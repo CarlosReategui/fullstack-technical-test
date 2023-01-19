@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TAnimal } from "../types";
+import { TAnimal, TUser } from "../types";
 
 const BASE_URL = "http://localhost:8000/";
 
@@ -60,6 +60,20 @@ const api = {
     },
     delete: (id: number) => {
       return ApiWithToken.delete(`${BASE_URL}api/animales/${id}/`);
+    },
+  },
+  adoptante: {
+    post: (adoptante: TUser) => {
+      return ApiWithToken.post(`${BASE_URL}api/adoptantes/`, adoptante);
+    },
+    get: () => {
+      return ApiWithToken.get(`${BASE_URL}api/adoptantes/`);
+    },
+    put: (adoptante: TUser, id: number) => {
+      return ApiWithToken.put(`${BASE_URL}api/adoptantes/${id}/`, adoptante);
+    },
+    delete: (id: number) => {
+      return ApiWithToken.delete(`${BASE_URL}api/adoptantes/${id}/`);
     },
   },
 };

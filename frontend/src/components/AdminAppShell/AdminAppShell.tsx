@@ -14,7 +14,7 @@ const AdminAppShell: React.FC<Props> = ({ children }) => {
       padding="md"
       fixed={false}
       navbar={
-        <Navbar width={{ base: 300 }} p="xs">
+        <Navbar width={{ base: 225 }} p="xs">
           <Navbar.Section grow mt="xs">
             <MainLinks />
           </Navbar.Section>
