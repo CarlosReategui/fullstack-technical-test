@@ -4,16 +4,20 @@ import { AiFillHeart } from "react-icons/ai";
 import { RiHandHeartFill } from "react-icons/ri";
 import { FaDog } from "react-icons/fa";
 import { ThemeIcon, UnstyledButton, Group, Text } from "@mantine/core";
+import { useNavigate } from "react-router";
 
 interface MainLinkProps {
   icon: React.ReactNode;
   color: string;
   label: string;
+  route: string;
 }
 
-function MainLink({ icon, color, label }: MainLinkProps) {
+function MainLink({ icon, color, label, route }: MainLinkProps) {
+  const navigate = useNavigate();
   return (
     <UnstyledButton
+      onClick={() => navigate(route)}
       sx={(theme) => ({
         display: "block",
         width: "100%",
@@ -42,14 +46,26 @@ const data = [
     icon: <MdPets size={16} />,
     color: "blue",
     label: "Animales",
+    route: "/admin/animales",
   },
-  { icon: <AiFillHeart size={16} />, color: "teal", label: "Adoptantes" },
+  {
+    icon: <AiFillHeart size={16} />,
+    color: "teal",
+    label: "Adoptantes",
+    route: "/admin/adoptantes",
+  },
   {
     icon: <RiHandHeartFill size={16} />,
     color: "violet",
     label: "Voluntarios",
+    route: "/admin/voluntarios",
   },
-  { icon: <FaDog size={16} />, color: "grape", label: "Adopciones" },
+  {
+    icon: <FaDog size={16} />,
+    color: "grape",
+    label: "Adopciones",
+    route: "/admin/adopciones",
+  },
 ];
 
 export function MainLinks() {

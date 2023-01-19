@@ -60,7 +60,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
       setUser(newUser);
       switch (newUser.role) {
         case "ADMIN":
-          navigate("/admin");
+          navigate("/admin/animales");
           break;
         case "ADOPTANTE":
           navigate("/adoptante");

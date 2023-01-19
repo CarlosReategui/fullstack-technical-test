@@ -1,7 +1,8 @@
 import React from "react";
+import AdminAppShell from "../../components/AdminAppShell/AdminAppShell";
 
 type Props = {};
 
 export const AdminAdoptantesPage = (props: Props) => {
-  return <div>AdminAdoptantesPage</div>;
+  return <AdminAppShell>adoptantes</AdminAppShell>;
 };
