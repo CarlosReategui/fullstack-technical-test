@@ -1,11 +1,12 @@
 from .models import Adoptante, Voluntario, Animal, Adopcion
 from .serializers import AdoptanteSerializer, MyTokenObtainPairSerializer, VoluntarioSerializer, AnimalSerializer, AdopcionSerializer, UserSerializer
 
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.authentication import BasicAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.views import APIView
 
 
 def custom_update(self, request, pk=None):
@@ -81,3 +82,27 @@ class AdopcionViewSet(viewsets.ModelViewSet):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class MyAdoptionsViewSet(APIView):
+    serializer_class = AdopcionSerializer
+    authentication_classes = [JWTAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        adoptions = Adopcion.objects.filter(adoptante=self.request.user.id)
+        serializer = AdopcionSerializer(adoptions, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class NotAdoptedAnimalsViewSet(APIView):
+    serializer_class = AnimalSerializer
+    authentication_classes = [JWTAuthentication, BasicAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        animals = Animal.objects.filter(estado='EN_ADOPCION')
+        serializer = AnimalSerializer(animals, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

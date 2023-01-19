@@ -61,6 +61,9 @@ const api = {
     delete: (id: number) => {
       return ApiWithToken.delete(`${BASE_URL}api/animales/${id}/`);
     },
+    getNoAdoptados: () => {
+      return ApiWithToken.get(`${BASE_URL}api/animalesNAdoptados/`);
+    },
   },
   adoptante: {
     post: (adoptante: TUser) => {
@@ -76,7 +79,7 @@ const api = {
       return ApiWithToken.delete(`${BASE_URL}api/adoptantes/${id}/`);
     },
   },
-  voluntario: {
+  voluntarios: {
     post: (voluntario: TUser) => {
       return ApiWithToken.post(`${BASE_URL}api/voluntarios/`, voluntario);
     },
@@ -93,6 +96,9 @@ const api = {
   adopciones: {
     get: () => {
       return ApiWithToken.get(`${BASE_URL}api/adopciones/`);
+    },
+    misAdopciones: () => {
+      return ApiWithToken.get(`${BASE_URL}api/misAdopciones/`);
     },
   },
 };

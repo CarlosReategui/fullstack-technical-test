@@ -23,7 +23,7 @@ export const AdminVoluntariosPage = (props: Props) => {
 
   const getVoluntarios = useCallback(async () => {
     try {
-      const response = await api.voluntario.get();
+      const response = await api.voluntarios.get();
       setVoluntarios(response.data);
     } catch {
       logout();
@@ -59,7 +59,7 @@ export const AdminVoluntariosPage = (props: Props) => {
   const onClickAcceptDelete = async (id: number | undefined) => {
     if (id) {
       try {
-        await api.voluntario.delete(id);
+        await api.voluntarios.delete(id);
         navigate(0);
       } catch {
         showNotification({

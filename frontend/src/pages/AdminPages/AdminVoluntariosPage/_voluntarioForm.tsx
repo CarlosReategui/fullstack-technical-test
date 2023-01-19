@@ -60,7 +60,7 @@ export const AddVoluntarioForm = (props: Props) => {
     if (!props.initialValues) {
       try {
         user.password = values.password;
-        await api.voluntario.post(user);
+        await api.voluntarios.post(user);
         navigate(0);
       } catch {
         success = false;
@@ -69,7 +69,7 @@ export const AddVoluntarioForm = (props: Props) => {
       console.log("trate hacer put");
       if (props.id) {
         try {
-          await api.voluntario.put(user, props.id);
+          await api.voluntarios.put(user, props.id);
           navigate(0);
         } catch {
           success = false;

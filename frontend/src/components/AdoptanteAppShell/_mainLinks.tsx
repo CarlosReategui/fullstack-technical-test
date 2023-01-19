@@ -49,7 +49,7 @@ const data = [
   {
     icon: <FaDog size={16} />,
     color: "grape",
-    label: "Adopciones",
+    label: "Mis adopciones",
     route: "/adoptante/misAdopciones",
   },
 ];

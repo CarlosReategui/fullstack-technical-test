@@ -1,0 +1,1 @@
+export { AdopcionesReadTable } from "./AdopcionesReadTable";
