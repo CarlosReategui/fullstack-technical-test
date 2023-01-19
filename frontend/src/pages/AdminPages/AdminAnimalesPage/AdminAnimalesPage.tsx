@@ -84,10 +84,18 @@ export const AdminAnimalesPage = (props: Props) => {
         >
           <Title order={3}>¿Seguro que desea borrar el animal?</Title>
           <Group mt="lg" position="center">
-            <Button onClick={() => onClickAcceptDelete(id)} color="red">
+            <Button
+              onClick={() => onClickAcceptDelete(id)}
+              color="red"
+              variant="light"
+            >
               Sí
             </Button>
-            <Button onClick={() => setDeleteModalOpened(false)} color="teal">
+            <Button
+              onClick={() => setDeleteModalOpened(false)}
+              color="teal"
+              variant="light"
+            >
               No
             </Button>
           </Group>
