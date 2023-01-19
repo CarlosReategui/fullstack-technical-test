@@ -1,7 +1,8 @@
 import axios from "axios";
 import { TAnimal, TUser } from "../types";
 
-const BASE_URL = "http://localhost:8000/";
+// const BASE_URL = "http://localhost:8000/";
+const BASE_URL = "https://pets-app.onrender.com/";
 
 const ApiWithToken = axios.create({
   headers: {
@@ -22,6 +23,22 @@ ApiWithToken.interceptors.request.use(
     Promise.reject(error);
   }
 );
+
+// ApiWithToken.interceptors.response.use(
+//   (response) => {
+//     response.headers = {
+//       "Access-Control-Allow-Origin": "*",
+//       "Access-Control-Allow-Credentials": "true",
+//       "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+//       "Access-Control-Allow-Headers":
+//         "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
+//     };
+//     return response;
+//   },
+//   (error) => {
+//     console.log(error);
+//   }
+// );
 
 const api = {
   login: (email: string, password: string) => {
