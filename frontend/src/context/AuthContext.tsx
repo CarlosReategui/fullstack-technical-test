@@ -29,6 +29,7 @@ interface AuthContextProps {
     lastName: string;
     role: string;
   }) => void;
+  updateTokenElseLogout: () => Promise<void>;
 }
 
 type Props = {
@@ -132,7 +133,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   const logoutCallback = useCallback(logout, [navigate]);
 
-  const updateToken = useCallback(async () => {
+  const updateTokenElseLogout = useCallback(async () => {
     console.log("Update token called");
     try {
       const response = await api.tokenRefresh(authTokens.refresh);
@@ -150,20 +151,28 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (tokenLoading) {
-      updateToken();
+      updateTokenElseLogout();
     }
-    const fourMinutes = 4 * 60 * 1000;
+    const minutes = 12 * 60 * 1000;
     const interval = setInterval(() => {
       if (authTokens) {
-        updateToken();
+        updateTokenElseLogout();
       }
-    }, fourMinutes);
+    }, minutes);
     return () => clearInterval(interval);
-  }, [tokenLoading, authTokens, updateToken]);
+  }, [tokenLoading, authTokens, updateTokenElseLogout]);
 
   return (
     <AuthContext.Provider
-      value={{ loading, logout, login, register, authTokens, user }}
+      value={{
+        loading,
+        logout,
+        login,
+        register,
+        authTokens,
+        user,
+        updateTokenElseLogout,
+      }}
     >
       {tokenLoading ? null : children}
     </AuthContext.Provider>

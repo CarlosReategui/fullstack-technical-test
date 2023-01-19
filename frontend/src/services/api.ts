@@ -1,4 +1,5 @@
 import axios from "axios";
+import { TAnimal } from "../types";
 
 const BASE_URL = "http://localhost:8000/";
 
@@ -47,8 +48,19 @@ const api = {
   }) => {
     return axios.post(`${BASE_URL}api/adoptantes/`, body);
   },
-  getAnimals: () => {
-    return ApiWithToken.get(`${BASE_URL}api/animales/`);
+  animal: {
+    post: (animal: TAnimal) => {
+      return ApiWithToken.post(`${BASE_URL}api/animales/`, animal);
+    },
+    get: () => {
+      return ApiWithToken.get(`${BASE_URL}api/animales/`);
+    },
+    put: (animal: TAnimal, id: number) => {
+      return ApiWithToken.put(`${BASE_URL}api/animales/${id}/`, animal);
+    },
+    delete: (id: number) => {
+      return ApiWithToken.delete(`${BASE_URL}api/animales/${id}/`);
+    },
   },
 };
 
